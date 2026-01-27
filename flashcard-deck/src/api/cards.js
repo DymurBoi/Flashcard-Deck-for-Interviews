@@ -29,7 +29,7 @@ export const getCards = () => {
 
 // POST a new card
 export const createCard = (cardData) => {
-  return api.post("/card", cardData);
+  return api.post("/card/post", cardData);
 };
 
 // UPDATE card

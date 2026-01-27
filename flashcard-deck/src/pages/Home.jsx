@@ -6,14 +6,20 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
-import {getCards, updateCard} from "../api/cards"
+import {createCard, getCards, updateCard} from "../api/cards"
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import FormModal from '../components/FormModal';
+import Typography from "@mui/material/Typography";
 
 function Home(){
     const [cards,setCards]= useState([]);
     const [flipped,setFlipped] = useState(false);
     const [currentIndex,setCurrentIndex] = useState(0);
     const [addModal,setAddModal] = useState(false);
-    const [updateModal,setUpdateAddModal] = useState(false);
+    const [updateModal,setUpdateModal] = useState(false);
+    const [newQuestion, setNewQuestion] = useState('');
+    const [newAnswer, setNewAnswer] = useState('');
 
     useEffect(() => {
         const fetchCards = async () => {
@@ -59,19 +65,55 @@ function Home(){
         } catch (e) {
             console.error(e);
         }
-        
     }
+    const handleCreateCard = async (e) => {
+        try {
+            const res = await createCard({
+                question: newQuestion,
+                answer: newAnswer,
+                isMastered: false,
+                deckId: 1,
+            });
+            console.log(res.data);
+        } catch (error) {
+            console.error(error);
+        }
+        setAddModal(false);
+    };
+
+    const handleUpdateCard = async (e) => {
+        try {
+            const res = await updateCard(currentCard.id,{
+                question: newQuestion,
+                answer: newAnswer,
+            });
+            console.log(res.data);
+        } catch (error) {
+            console.error(error);
+        }
+        setUpdateModal(false);
+    };
 
     if (cards.length === 0) {
         return <p>Loading cards...</p>;
     }
 
+    const closeAddModal = () =>{
+        setAddModal(false);
+        setNewAnswer('');
+        setNewQuestion('');
+    }
+
+    const closeUpdateModal = () =>{
+        setUpdateModal(false);
+        setNewAnswer('');
+        setNewQuestion('');
+    }
     const currentCard = cards[currentIndex];
     return(
         <>
-        <h2>Flashcards</h2>
+        <Typography color="primary">Flashcards</Typography>
             <div className="container">
-            
             <div className={`card ${flipped ? "flipped": ""}`} onClick={()=>setFlipped(!flipped)}>
             <div className="card-content">
                 <div className="card-front">
@@ -84,7 +126,7 @@ function Home(){
             </div>
             
             <div className="button-container">
-            <button onClick={handleBack}><ArrowBackIcon/></button>
+            <Button variant="outlined" onClick={handleBack}><ArrowBackIcon/></Button>
             <button className="star-button" onClick={e => { e.stopPropagation(); toggleMastered(); }}>
             {currentCard.isMastered ? (
                 <>
@@ -95,18 +137,80 @@ function Home(){
             )}
             <p>{currentIndex+1}/{cards.length}</p>
             </button>
-            <button onClick={handleNext}><ArrowForwardIcon/></button>
-            <button onClick={e=>{e.stopPropagation(); setAddModal(!addModal)}}><AddIcon/><p>Add a card</p></button>
-            <button onClick={e=>{e.stopPropagation(); setUpdateAddModal(!updateModal)}}><EditIcon/><p>Edit card</p></button>
+            <Button onClick={handleNext}><ArrowForwardIcon/></Button>
+            <Button onClick={e=>{e.stopPropagation(); setAddModal(!addModal)}}><AddIcon/>Add a card</Button>
+            <Button onClick={e=>{e.stopPropagation(); setUpdateModal(!updateModal); setNewQuestion(currentCard.question); setNewAnswer(currentCard.answer);}}><EditIcon/>Edit card</Button>
             </div>
+            {/* Add Card Modal */}
             { addModal? (
-                <p>Add Modal</p>
+                <FormModal
+                    open={open}
+                    onClose={() => closeAddModal()}
+                    title="Create Card"
+                    onSubmit={handleCreateCard}
+                >
+                    <TextField
+                    label="Question"
+                    fullWidth
+                    margin="normal"
+                    value={newQuestion}
+                    onChange={(e) => setNewQuestion(e.target.value)}
+                    />
+
+                    <TextField
+                    label="Answer"
+                    fullWidth
+                    margin="normal"
+                    value={newAnswer}
+                    onChange={(e) => setNewAnswer(e.target.value)}
+                    />
+
+                    <Button
+                    type="submit"
+                    variant="contained"
+                    sx={{ mt: 2 }}
+                    fullWidth
+                    >
+                    Save
+                    </Button>
+                </FormModal>
+                
             ):(
                 <>
                 </>
             )}
             { updateModal? (
-                <p>Update Modal</p>
+                <FormModal
+                    open={open}
+                    onClose={() => closeUpdateModal()}
+                    title="Update Modal"
+                    onSubmit={handleUpdateCard}
+                >
+                    <TextField
+                    label="Question"
+                    fullWidth
+                    margin="normal"
+                    value={newQuestion}
+                    onChange={(e) => setNewQuestion(e.target.value)}
+                    />
+
+                    <TextField
+                    label="Answer"
+                    fullWidth
+                    margin="normal"
+                    value={newAnswer}
+                    onChange={(e) => setNewAnswer(e.target.value)}
+                    />
+
+                    <Button
+                    type="submit"
+                    variant="contained"
+                    sx={{ mt: 2 }}
+                    fullWidth
+                    >
+                    Save
+                    </Button>
+                </FormModal>
             ):(
                 <>
                 </>

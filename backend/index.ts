@@ -82,7 +82,11 @@ app.post(`/card/post`, async (req, res)=>{
 })
 
 app.get(`/card/all`, async (req,res)=>{
-    const decks = await prisma.card.findMany()
+    const decks = await prisma.card.findMany({
+        orderBy:{
+            id: `asc`,
+        }
+    })
     res.json(decks)
 })
 
