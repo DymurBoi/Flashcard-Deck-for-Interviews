@@ -1,8 +1,11 @@
+import Typography from "@mui/material/Typography";
+
 function DeckCard({ deck, onClick }) {
   return (
     <div className="deck-card" onClick={() => onClick(deck.id)}>
-      <h3>{deck.title}</h3>
-      <p>{deck.cardCount} cards</p>
+      <div className="deck-card-text">
+        <Typography variant="h5">{deck.title}</Typography>
+      </div>
     </div>
   );
 }
