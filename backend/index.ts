@@ -98,6 +98,17 @@ app.get(`/card/:id`, async (req,res)=>{
     res.json(decks)
 })
 
+app.get(`/card/getByDeck/:id`, async (req,res)=>{
+    const {id} = req.params
+    const decks = await prisma.card.findMany({
+        where:{deckId:Number(id)},
+        orderBy:{
+            id: `asc`,
+        },
+    })
+    res.json(decks)
+})
+
 app.patch(`/card/:id`, async (req, res)=>{
     const {id} = req.params
     const {question, answer, isMastered, deckId} = req.body

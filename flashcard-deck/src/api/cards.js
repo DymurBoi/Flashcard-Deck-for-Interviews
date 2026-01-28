@@ -1,6 +1,6 @@
 import api from "./axios";
 
-export const getDeck = () => {
+export const getDecks = () => {
   return api.get("/deck/all");
 };
 
@@ -25,6 +25,10 @@ export const deleteDeck = (id) => {
 
 export const getCards = () => {
   return api.get("/card/all");
+};
+
+export const getCardsByDeckId = (id) => {
+  return api.get(`/card/getByDeck/${id}`);
 };
 
 // POST a new card
