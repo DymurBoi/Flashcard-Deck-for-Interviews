@@ -82,52 +82,52 @@ app.post(`/card/post`, async (req, res)=>{
 })
 
 app.get(`/card/all`, async (req,res)=>{
-    const decks = await prisma.card.findMany({
+    const card = await prisma.card.findMany({
         orderBy:{
             id: `asc`,
         }
     })
-    res.json(decks)
+    res.json(card)
 })
 
 app.get(`/card/:id`, async (req,res)=>{
     const {id} = req.params
-    const decks = await prisma.card.findUnique({
+    const card = await prisma.card.findUnique({
         where:{id:Number(id)}
     })
-    res.json(decks)
+    res.json(card)
 })
 
 app.get(`/card/getByDeck/:id`, async (req,res)=>{
     const {id} = req.params
-    const decks = await prisma.card.findMany({
+    const card = await prisma.card.findMany({
         where:{deckId:Number(id)},
         orderBy:{
             id: `asc`,
         },
     })
-    res.json(decks)
+    res.json(card)
 })
 
 app.patch(`/card/:id`, async (req, res)=>{
     const {id} = req.params
     const {question, answer, isMastered, deckId} = req.body
-    const deck = await prisma.card.update({
+    const card = await prisma.card.update({
         where: {id:Number(id)},
         data : {question,
                 answer,
                 isMastered,
                 deckId},
     })
-    res.json(deck)
+    res.json(card)
 })
 
 app.delete(`/card/:id`, async (req, res)=>{
     const {id} = req.params
-    const deck = await prisma.cardDeck.delete({
+    const card = await prisma.card.delete({
         where: {id:Number(id),},
     })
-    res.json(deck)
+    res.json(card)
 })
 
 const server = app.listen(3000, () =>

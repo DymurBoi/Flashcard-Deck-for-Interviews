@@ -4,7 +4,7 @@ export const getDecks = () => {
   return api.get("/deck/all");
 };
 
-export const getDeckById = () => {
+export const getDeckById = (id) => {
   return api.get(`/deck/${id}`);
 };
 
@@ -23,7 +23,7 @@ export const deleteDeck = (id) => {
   return api.delete(`/deck/${id}`);
 };
 
-export const getCards = () => {
+export const getAllCards = () => {
   return api.get("/card/all");
 };
 

@@ -1,47 +1,61 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
-
-body {
-  font-family: "Inter", system-ui, sans-serif;
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* don't push columns apart */
+  align-items: center;     /* align to top */
+  padding: 20px;
+  height: 70vh;
+  gap: 40px; /* distance between left and right columns */
 }
 
 .container{
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  justify-content: center; /* don't push columns apart */
+  align-items: center;     /* align to top */
   padding: 20px;
-  height: 100vh;
+  height: 70vh;
+  gap: 40px; /* distance between left and right columns */
 }
 
-.card{
-    width: 450px;
-    height: 300px;
-    cursor: pointer;
+.container--column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  gap: 20px;
 }
 
-.card-content{
-    position: relative;
-    width: 450px;
-    height: 300px;
-    transform-style: preserve-3d;
-    transition: all 0.5s ease;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    border-radius: 12px;
-    background-color: whitesmoke;
+.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* space between title, card, and arrows */
+}
+
+.card {
+  width: 520px;
+  height: 300px;
+  cursor: pointer;
+}
+
+.card-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: all 0.5s ease;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  background-color: white;
+}
+
+.card-content--empty{
+  
 }
 
 .card.flipped .card-content {
   transform: rotateY(180deg);
-}
-
-.card-text{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  border-radius: 12px;
-  width: 100%;
-  height: 100%;
-  text-align: center;
 }
 
 .card-front,
@@ -63,30 +77,65 @@ body {
   transform: rotateY(180deg);
 }
 
+.card-buttons {
+  display: flex;
+  justify-content: space-between; /* push edges apart */
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.center-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+}
+
+.arrow-button {
+  min-width: 40px;
+}
+
 .star-button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    margin-right: 16px; /* spacing from card text */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4px;
-    z-index: 10;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
 }
 
 .star-button svg {
-  font-size: 28px; /* adjust icon size */
+  font-size: 28px;
   color: gray;
 }
 
 .star-button:hover svg {
-  color: gold; /* hover color */
+  color: gold;
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  height: 240px;
+}
+
+
+.right-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 10px; /* spacing between buttons */
+  flex-wrap: wrap; /* wrap on smaller screens */
+}
+
+.right-buttons button {
+  width: 225px; /* fixed width */
+  min-width: 0;  /* prevent automatic stretching */
 }
 
 .button-container{
-    margin-top: 30px;
-    display: flex;
-    flex-direction: row;
-    gap:10px;
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
 }

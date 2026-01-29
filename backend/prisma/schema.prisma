@@ -25,6 +25,6 @@ model Card{
   question String
   answer String
   isMastered Boolean
-  deck CardDeck @relation(fields: [deckId], references: [id])
+  deck CardDeck @relation(fields: [deckId], references: [id], onDelete: Cascade)
   deckId Int
 }

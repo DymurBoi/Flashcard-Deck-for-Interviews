@@ -7,6 +7,7 @@ import FormModal from "../components/FormModal";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import "../styles/home.css";
+import Typography from "@mui/material/Typography";
 
 function Home() {
   const [decks, setDecks] = useState([]);
@@ -24,7 +25,7 @@ function Home() {
   }, []);
 
   if (decks.length === 0) {
-    return <p>Loading decks...</p>;
+    return (<div className="loading"><p>Loading decks...</p></div>);
   }
 
   const handleDeckClick = (deckId) => {
@@ -40,12 +41,15 @@ function Home() {
         console.log(res.data);
         const fetchRes = await getDecks();
         setDecks(fetchRes.data);
+        setAddModal(false);
     } catch (error) {
         console.log(error);
     }
   }
 
   return (
+    <div className="deck-container">
+    <Typography align="left" variant="h4" sx={{fontWeight: 'bold', color:'#1976d2'}}>Card Decks</Typography>
     <div className="deck-grid">
       {decks.map((deck) => (
         <DeckCard
@@ -56,7 +60,7 @@ function Home() {
       ))}
       <div className="deck-card" onClick={()=>setAddModal(!addModal)}>
         <div className="deck-card-text">
-            <AddIcon/> Add a deck
+            <AddIcon fontSize="large"/> Add a deck
         </div>
       </div>
       { addModal? (
@@ -81,7 +85,15 @@ function Home() {
                     value={newDescription}
                     onChange={(e) => setNewDescription(e.target.value)}
                     />
-
+                    <div className="button-container">
+                       <Button
+                        variant="contained"
+                        color="#DCDCDC"
+                        sx={{ mt: 2 }}
+                        fullWidth
+                        onClick={() => setAddModal(false)}>
+                        Cancel
+                        </Button>
                     <Button
                     type="submit"
                     variant="contained"
@@ -90,12 +102,14 @@ function Home() {
                     >
                     Save
                     </Button>
+                  </div>
                 </FormModal>
                 
             ):(
                 <>
                 </>
             )}
+    </div>
     </div>
   );
 }
