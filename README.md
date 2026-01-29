@@ -42,7 +42,6 @@ npm install
 3. Configure environment variables:
 Create a `.env` file in the backend directory containing:
 DATABASE_URL = [Session Pooler from your Supabase DB]
-DIRECT_URL = [Transaction Pooler from your Supabase DB]
 
 4. Database Migration
 ```bash
