@@ -51,7 +51,7 @@ function Home() {
 
   return (
     <div className="deck-container">
-    <Typography align="left" variant="h4" sx={{fontWeight: 'bold', color:'#1976d2'}}>Card Decks</Typography>
+    <Typography align="left" variant="h4" sx={{fontWeight: 'bold', color:'#015A84', fontFamily: "Raleway, sans-serif"}}>Card Decks</Typography>
     <div className="deck-grid">
       {decks.map((deck) => (
         <DeckCard

@@ -193,7 +193,7 @@ function Flashcards(){
             <div className="container">
             {/* Left column */}
             <div className="left-column">
-                <Typography sx={{textAlign: 'left', marginLeft: 5, marginTop: 4, fontWeight: '600'}} variant="h4" color="#1976d2">{deck.title}</Typography>
+                <Typography sx={{textAlign: 'left', marginLeft: 5, marginTop: 4, fontWeight: '600', fontFamily: "Raleway, sans-serif",}} variant="h4" color="#005B85">{deck.title}</Typography>
 
                 <div className={`card ${flipped ? "flipped" : ""}`} onClick={() => setFlipped(!flipped)}>
                 <div className="card-content">
@@ -219,8 +219,8 @@ function Flashcards(){
 
             {/* Right column */}
             <div className="right-column">
-            <Typography variant="h4" sx={{fontWeight: 'bold', color:'#222',mb: '1rem'}}>Deck Description</Typography>
-            <Typography variant="body1" sx={{ mb: '6rem', color: "#555",fontSize: 20, textAlign:"left", maxWidth:'45rem'}}>
+            <Typography variant="h4" sx={{fontWeight: '600' ,mb: '1rem', fontFamily: "Raleway, sans-serif"}} >Deck Description</Typography>
+            <Typography variant="body1" sx={{ mb: '6rem', color: "#555",fontSize: 20, textAlign:"left", maxWidth:'45rem', fontFamily: "Raleway, sans-serif",}}>
                 {deck.description}
             </Typography>
             <div className="right-buttons">
@@ -229,7 +229,7 @@ function Flashcards(){
                         variant="contained"
                         startIcon={<AddIcon />}
                     >
-                        Add
+                        <Typography sx={{fontFamily: "Raleway, sans-serif", textTransform: 'none' }}>Add</Typography>
                     </Button>
 
                     <Button 
@@ -242,7 +242,7 @@ function Flashcards(){
                         variant="outlined"
                         startIcon={<EditIcon />}
                     >
-                        Edit
+                        <Typography sx={{fontFamily: "Raleway, sans-serif", textTransform: 'none' }}>Edit</Typography>
                     </Button>
 
                     <Button 
@@ -251,7 +251,7 @@ function Flashcards(){
                         startIcon={<DeleteIcon />}
                         variant="contained"
                     >
-                        Delete
+                        <Typography sx={{fontFamily: "Raleway, sans-serif", textTransform: 'none' }}>Delete</Typography>
                     </Button>
                 </div>
             </div>
