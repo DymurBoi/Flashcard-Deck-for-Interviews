@@ -46,7 +46,7 @@ DIRECT_URL = [Transaction Pooler from your Supabase DB]
 
 4. Database Migration
 ```bash
-npx prisma db push
+npx prisma migrate dev --name init
 npx prisma generate
 ```
 
