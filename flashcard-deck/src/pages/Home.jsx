@@ -14,17 +14,19 @@ function Home() {
   const [newTitle, setNewTitle] = useState('');
   const [newDescription, setNewDescription] = useState('');
   const [addModal, setAddModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDecks = async () => {
       const res = await getDecks();
       setDecks(res.data);
+      setIsLoading(false);
     };
     fetchDecks();
   }, []);
 
-  if (decks.length === 0) {
+  if (isLoading) {
     return (<div className="loading"><p>Loading decks...</p></div>);
   }
 
